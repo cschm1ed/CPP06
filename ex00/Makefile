@@ -12,24 +12,31 @@
 
 NAME		:= convert
 
+VPATH		:= sources
+
+BUILDDIR	:= build
+
 SRCS		:= main.cpp ScalarConverter.cpp
 
-OBJS		:= $(SRCS:.cpp=.o)
+OBJS		:= $(SRCS:%.cpp=$(BUILDDIR)/%.o)
 
-CFLAGS		:= -Wall -Werror -Wextra -std=c++98 -pedantic
+CFLAGS		:= -Wall -Werror -Wextra -g -I includes -std=c++98 -pedantic
 
 CC			:= c++
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $^ -o $@
 
-%.o: %.cpp
+$(BUILDDIR)/%.o: %.cpp $(BUILDDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
+
+$(BUILDDIR):
+	mkdir $(BUILDDIR)
 
 .PHONY: clean all re fclean
 
 clean:
-	rm -rf $(OBJS)
+	rm -rf $(BUILDDIR)
 
 fclean: clean
 	rm -rf $(NAME)

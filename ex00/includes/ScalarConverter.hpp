@@ -15,7 +15,9 @@
 
 #include <iostream>
 #include <sstream>
-
+#include <colors.hpp>
+#include <climits>
+#include <float.h>
 
 class ScalarConverter {
 public:
@@ -27,13 +29,16 @@ public:
 	static void convert(std::string &literal);
 
 private:
-	static bool isChar(std::string const & str);
 	static bool isInt(std::string const & str);
 	static bool isFloat(std::string const & str);
 	static bool isDouble(std::string const & str);
+	static void displayChar(std::string const & str);
+	static bool checkRemainingInt(std::string const & str);
+	static bool checkRemainingFloat(std::string const & str);
+	static void displayFloat(std::string const & str);
+	static void displayDouble(std::string const & str);
+	static void displayInt(std::string const & str);
 
-
-private:
 };
 
 

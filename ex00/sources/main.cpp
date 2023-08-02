@@ -18,5 +18,7 @@ int main(int argc, char **argv) {
 		std::cout << "ERROR: wrong input\n";
 		return 1;
 	}
+	std::string str(argv[1]);
+	ScalarConverter::convert(str);
 	(void)argv;
 }
