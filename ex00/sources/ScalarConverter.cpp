@@ -34,35 +34,48 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &rhs) {
 void ScalarConverter::convert(std::string &literal) {
 	long double n;
 	char	*pEnd;
+	bool	isnum;
 
 	n = strtold(literal.c_str(), &pEnd);
-
 	//char
-	if (n < 128 && n >= 0) {
+	if (n < 128 && n >= 0 && (*pEnd == 'f' || *pEnd == 0)) {
 		if (isprint(n))
-			std::cout << std::setw(10) << "char: " << GREEN << static_cast<char>(n) << "\n" << RESET;
+			std::cout << "char: " << GREEN << static_cast<char>(n) << "\n" << RESET;
 		else
 			std::cout << "char: " << MAGENTA << "Non displayable\n" << RESET;
 	}
 	else
 		std::cout << "char: " << RED << "impossible\n" << RESET;
-
 	//int
 	if (n < INT_MAX && n > INT_MIN)
 		std::cout << "int: " << GREEN << static_cast<int>(n) << "\n" << RESET;
 	else
 		std::cout << "int " << RED << "impossible\n" << RESET;
-
 	//float
-	if (n < FLT_MAX && n > FLT_MIN)
-		std::cout << "float: " << GREEN << static_cast<float>(n) << "\n" << RESET;
+	if (n < FLT_MAX && n > -FLT_MAX)
+	{
+		std::cout << "float: " << GREEN << static_cast<float>(n);
+		if (literal.find('.') == std::string::npos) {
+			std::cout << ".0f";
+		}
+		else {
+			std::cout << "f";
+		}
+		std::cout << "\n" << RESET;
+	}
 	else
 		std::cout << "float: " << RED << "impossible\n" << RESET;
 
 	//double
 	std::cout << "double: ";
-	if (n < DBL_MAX && n > DBL_MIN)
-		std::cout << GREEN << static_cast<double>(n) << "\n" << RESET;
+	if (n < DBL_MAX && n > -DBL_MAX) {
+		std::cout << GREEN << static_cast<double>(n);
+		if (literal.find('.') == std::string::npos) {
+			std::cout << ".0";
+		}
+		std::cout << "\n" << RESET;
+	}
 	else
 		std::cout << RED << "impossible\n" << RESET;
+	std::cout << "pEnd: " << pEnd << "\n";
 }
