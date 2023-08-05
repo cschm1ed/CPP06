@@ -16,7 +16,8 @@
 #include <iostream>
 #include <sstream>
 #include <colors.hpp>
-#include <float.h>
+#include <cstring>
+#include <cfloat>
 #include <iomanip>
 
 
@@ -31,6 +32,15 @@ public:
 
 private:
 
+	static void displayFloat(const std::string &literal, long double n, bool validString);
+
+	static void displayDouble(const std::string &literal, long double n, bool validString);
+
+	static void displayChar(long double n, const char *pEnd, bool validString);
+
+	static void displayInt(long double n, bool validString);
+
+	static int displayPseudoLiteral(std::string const & literal);
 };
 
 
