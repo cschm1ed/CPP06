@@ -36,15 +36,16 @@
 		char *pEnd = nullptr;
 		bool validString = true;
 
-		if (literal.size() == 1) {
+		if (literal.size() == 1 && isprint(static_cast<int>(literal[0]))
+			&& !(static_cast<int>(literal[0]) <= '9' && static_cast<int>(literal[0]) >= '0')) {
 			n = static_cast<int>(literal[0]);
 		} else {
 			n = strtold(literal.c_str(), &pEnd);
-			if (*pEnd) {
+			if (*pEnd && strncmp(pEnd, "f", 2)) {
 				validString = false;
 			}
 		}
-		displayChar(n, pEnd, validString);
+		displayChar(n, validString);
 		displayInt(n, validString && literal != "nan" && literal != "-inf" && literal != "+inf");
 		displayFloat(literal, n, validString);
 		displayDouble(literal, n, validString);
@@ -57,8 +58,8 @@
 			std::cout << "int " << RED << "impossible\n" << RESET;
 	}
 
-	void ScalarConverter::displayChar(long double n, const char *pEnd, bool validString) {
-		if (n < 128 && n >= 0 && (pEnd == NULL || *pEnd == 'f' || *pEnd == 0) && validString) {
+	void ScalarConverter::displayChar(int n, bool validString) {
+		if (n < 128 && n >= 0 && validString) {
 			if (isprint(n))
 				std::cout << "char: " << GREEN << static_cast<char>(n) << "\n" << RESET;
 			else
@@ -73,12 +74,11 @@
 		if (displayPseudoLiteral(literal)) {
 			return;
 		}
-
 		if (n <= std::numeric_limits<double>::max() && n >= -std::numeric_limits<double>::max()
-			&& (n <= -std::numeric_limits<double>::min() || n >= std::numeric_limits<double>::min())
+			&& (n <= -std::numeric_limits<double>::min() || n >= std::numeric_limits<double>::min() || n == 0)
 			&& validString) {
 			std::cout << GREEN << static_cast<double>(n);
-			if (literal.find('.') == std::string::npos) {
+			if (literal.find('.') == std::string::npos && literal.find('e') == std::string::npos) {
 				std::cout << ".0";
 			}
 			std::cout << "\n" << RESET;
@@ -92,12 +92,11 @@
 		if (displayPseudoLiteral(literal)) {
 			return;
 		}
-
 		if (n <= std::numeric_limits<float>::max() && n >= -std::numeric_limits<float>::max()
-			&& (n <= -std::numeric_limits<float>::min() || n >= std::numeric_limits<float>::min())
+			&& (n <= -std::numeric_limits<float>::min() || n >= std::numeric_limits<float>::min() || n == 0)
 			&& validString) {
 			std::cout << static_cast<float>(n);
-			if (literal.find('.') == std::string::npos) {
+			if (literal.find('.') == std::string::npos && literal.find('e') == std::string::npos) {
 				std::cout << ".0f\n";
 			} else {
 				std::cout << "f\n";
@@ -107,20 +106,32 @@
 	}
 
 	int ScalarConverter::displayPseudoLiteral(std::string const &literal) {
-		if (literal == "nan" || literal == "+inf" || literal == "-inf") {
-			if (literal == "nan") {
-				std::cout << BLUE << "nan\n" << RESET;
-				return 1;
-			}
-			if (literal == "+inf") {
-				std::cout << BLUE << "inf\n" << RESET;
-				return 1;
-			}
+		std::string pseudoLiterals[] = {"+inf", "-inf", "nan", "+inff", "-inff", "nanf"};
+		int i = 0;
 
-			if (literal == "-inf") {
-				std::cout << BLUE << "-inf\n" << RESET;
+		while (i < 6) {
+			if (literal == pseudoLiterals[i])
+				break ;
+			i ++;
+		}
+		switch (i) {
+			case(0):
+				std::cout << BLUE << static_cast<float>(std::numeric_limits<double>::infinity()) << "\n" << RESET;
 				return 1;
-			}
+			case 1:
+				std::cout << BLUE << static_cast<float>(-std::numeric_limits<double>::infinity()) << "\n" <<  RESET;
+				return 1;
+			case 2:
+				std::cout << BLUE << static_cast<float>(std::numeric_limits<double>::quiet_NaN()) << "\n" << RESET;
+				return 1;
+			case 3:
+				std::cout << BLUE << static_cast<float>(std::numeric_limits<double>::infinity()) << "\n" << RESET;
+				return 1;
+			case 4:
+				std::cout << BLUE << static_cast<float>(-std::numeric_limits<double>::infinity()) << "\n" << RESET;
+				return 1;
+			case 5:
+				std::cout << BLUE << static_cast<float>(std::numeric_limits<double>::quiet_NaN()) << "\n" << RESET;
 		}
 		return 0;
 	}

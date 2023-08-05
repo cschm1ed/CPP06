@@ -36,7 +36,7 @@ private:
 
 	static void displayDouble(const std::string &literal, long double n, bool validString);
 
-	static void displayChar(long double n, const char *pEnd, bool validString);
+	static void displayChar(int n, bool validString);
 
 	static void displayInt(long double n, bool validString);
 

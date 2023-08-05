@@ -5,20 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cschmied <cschmied@student.42wolfsburg.d>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/01 13:10:27 by cschmied          #+#    #+#             */
-/*   Updated: 2023/08/01 13:10:27 by cschmied         ###   ########.fr       */
+/*   Created: 2023/08/05 12:21:45 by cschmied          #+#    #+#             */
+/*   Updated: 2023/08/05 12:22:43 by cschmied         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include "ScalarConverter.hpp"
+#include <Serializer.h>
 
-int main(int argc, char **argv) {
-	if (argc != 2) {
-		std::cout << "ERROR: wrong input\n";
-		return 1;
-	}
-	std::string str(argv[1]);
-	ScalarConverter::convert(str);
+int main() {
+
+
+
 	return 0;
 }

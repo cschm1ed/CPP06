@@ -1,24 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Serializer.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cschmied <cschmied@student.42wolfsburg.d>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/01 13:10:27 by cschmied          #+#    #+#             */
-/*   Updated: 2023/08/01 13:10:27 by cschmied         ###   ########.fr       */
+/*   Created: 2023/08/05 12:21:15 by cschmied          #+#    #+#             */
+/*   Updated: 2023/08/05 12:21:43 by cschmied         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include "ScalarConverter.hpp"
+#ifndef CPP06_SERIALIZER_HPP
+#define CPP06_SERIALIZER_HPP
 
-int main(int argc, char **argv) {
-	if (argc != 2) {
-		std::cout << "ERROR: wrong input\n";
-		return 1;
-	}
-	std::string str(argv[1]);
-	ScalarConverter::convert(str);
-	return 0;
-}
+#include <iostream>
+
+typedef struct Data {
+	uint content;
+} Data;
+
+class Serializer {
+
+public:
+	Serializer();
+
+	Serializer(Serializer const &other);
+
+	~Serializer();
+
+	Serializer &operator=(Serializer const &rhs);
+
+	static uintptr_t serialize(Data *ptr);
+	static Data*	deserialize(uintptr_t raw);
+
+private:
+
+};
+
+
+#endif //CPP06_SERIALIZER_HPP
