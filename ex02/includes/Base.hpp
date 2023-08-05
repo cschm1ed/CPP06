@@ -16,7 +16,7 @@
 #include <iostream>
 #include <colors.hpp>
 
-class	Base {
+class Base {
 public:
 	virtual ~Base() = 0;
 };

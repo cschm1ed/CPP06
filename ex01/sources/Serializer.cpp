@@ -21,12 +21,12 @@ Serializer::~Serializer() {
 }
 
 Serializer::Serializer(Serializer const &other) {
-	(void)other;
+	(void) other;
 	std::cout << "Serializer copy constructor called\n";
 }
 
 Serializer &Serializer::operator=(Serializer const &rhs) {
-	(void)rhs;
+	(void) rhs;
 	return *this;
 }
 

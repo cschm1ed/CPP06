@@ -32,7 +32,8 @@ public:
 	Serializer &operator=(Serializer const &rhs);
 
 	static uintptr_t serialize(Data *ptr);
-	static Data* deserialize(uintptr_t raw);
+
+	static Data *deserialize(uintptr_t raw);
 
 private:
 

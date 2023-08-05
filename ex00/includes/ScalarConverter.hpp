@@ -24,8 +24,11 @@
 class ScalarConverter {
 public:
 	ScalarConverter();
+
 	~ScalarConverter();
+
 	ScalarConverter(ScalarConverter const &other);
+
 	ScalarConverter &operator=(ScalarConverter const &rhs);
 
 	static void convert(std::string &literal);
@@ -40,7 +43,7 @@ private:
 
 	static void displayInt(long double n, bool validString);
 
-	static int displayPseudoLiteral(std::string const & literal);
+	static int displayPseudoLiteral(std::string const &literal);
 };
 
 

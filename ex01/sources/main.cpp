@@ -15,7 +15,7 @@
 #include <colors.hpp>
 
 int main() {
-	Data	sth;
+	Data sth;
 	uintptr_t ptr;
 
 	sth.content = 123;

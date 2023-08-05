@@ -15,12 +15,14 @@
 #include <B.hpp>
 #include <C.hpp>
 
-Base* generate();
+Base *generate();
+
 void identify(Base *p);
+
 void identify(Base &p);
 
 int main() {
-	Base	*random;
+	Base *random;
 
 	random = generate();
 	identify(random);
@@ -29,7 +31,7 @@ int main() {
 	delete random;
 }
 
-Base* generate() {
+Base *generate() {
 	std::srand(std::time(nullptr));
 	int x = rand() % 3;
 
@@ -49,11 +51,9 @@ void identify(Base *p) {
 	std::cout << "identified --> ";
 	if (dynamic_cast<A *>(p)) {
 		std::cout << BLUE << "A\n" << R;
-	}
-	else if (dynamic_cast<B *>(p)) {
+	} else if (dynamic_cast<B *>(p)) {
 		std::cout << YELLOW << "B\n" << R;
-	}
-	else
+	} else
 		std::cout << CYAN << "C\n" << R;
 
 }
@@ -63,10 +63,8 @@ void identify(Base &p) {
 	std::cout << "identified --> ";
 	if (dynamic_cast<A *>(&p)) {
 		std::cout << BLUE << "A\n" << R;
-	}
-	else if (dynamic_cast<B *>(&p)) {
+	} else if (dynamic_cast<B *>(&p)) {
 		std::cout << YELLOW << "B\n" << R;
-	}
-	else
+	} else
 		std::cout << CYAN << "C\n" << R;
 }
