@@ -1,42 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Serializer.hpp                                     :+:      :+:    :+:   */
+/*   B.hpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cschmied <cschmied@student.42wolfsburg.d>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/05 12:21:15 by cschmied          #+#    #+#             */
-/*   Updated: 2023/08/05 12:21:43 by cschmied         ###   ########.fr       */
+/*   Created: 2023/08/05 15:20:42 by cschmied          #+#    #+#             */
+/*   Updated: 2023/08/05 15:20:42 by cschmied         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CPP06_SERIALIZER_HPP
-#define CPP06_SERIALIZER_HPP
+#ifndef B_HPP
+#define B_HPP
 
+#include <Base.hpp>
+#include <colors.hpp>
 #include <iostream>
 
-typedef struct Data {
-	uint content;
-	std::string string;
-} Data;
-
-class Serializer {
-
+class B : public Base {
 public:
-	Serializer();
-
-	Serializer(Serializer const &other);
-
-	~Serializer();
-
-	Serializer &operator=(Serializer const &rhs);
-
-	static uintptr_t serialize(Data *ptr);
-	static Data* deserialize(uintptr_t raw);
-
-private:
-
+	~B();
 };
 
-
-#endif //CPP06_SERIALIZER_HPP
+#endif

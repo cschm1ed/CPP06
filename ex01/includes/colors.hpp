@@ -13,7 +13,7 @@
 #ifndef COLORS_H
 #define COLORS_H
 
-#define RESET   "\033[0m"
+#define R   "\033[0m"
 #define BLACK   "\033[30m"      			/* Black */
 #define RED     "\033[31m"      			/* Red */
 #define GREEN   "\033[32m"      			/* Green */

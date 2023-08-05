@@ -10,13 +10,13 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:= serialize
+NAME		:= identify
 
 VPATH		:= sources
 
 BUILDDIR	:= build
 
-SRCS		:= main.cpp Serializer.cpp
+SRCS		:= main.cpp Base.cpp A.cpp B.cpp C.cpp
 
 OBJS		:= $(SRCS:%.cpp=$(BUILDDIR)/%.o)
 
