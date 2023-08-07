@@ -95,11 +95,11 @@ void ScalarConverter::displayFloat(const std::string &literal, long double n, bo
 	if (n <= std::numeric_limits<float>::max() && n >= -std::numeric_limits<float>::max()
 		&& (n <= -std::numeric_limits<float>::min() || n >= std::numeric_limits<float>::min() || n == 0)
 		&& validString) {
-		std::cout << static_cast<float>(n);
+		std::cout << GREEN <<  static_cast<float>(n) << R;
 		if (literal.find('.') == std::string::npos && literal.find('e') == std::string::npos) {
-			std::cout << ".0f\n";
+			std::cout << GREEN".0f\n"R;
 		} else {
-			std::cout << "f\n";
+			std::cout << GREEN"f\n"R;
 		}
 	} else
 		std::cout << RED << "impossible\n" << R;
